@@ -1,4 +1,4 @@
-const productos = [
+const productos = [ //..productos..
     {
         id: 1,
         nombre: "ZAPATILLAS DURAMO SL",
@@ -25,8 +25,6 @@ const productos = [
     },
 ]
 
-// ...
-
 productos.forEach(producto => {
     const ContenedorDiv1 = document.getElementById("caja1");
 
@@ -41,16 +39,10 @@ productos.forEach(producto => {
     </div>`
 });
 
-// Selecciona todos los botones generados
+// botones generados
 const botones = document.querySelectorAll(".linkBtn");
 
-// Inicializa el carrito y el total
-const carrito = {
-    productos: [],
-    total: 0
-};
-
-// Asigna el evento click a cada botón
+// evento click a cada botón
 botones.forEach(boton => {
     boton.addEventListener("click", function () {
         const divProducto = boton.closest(".card");
@@ -67,15 +59,21 @@ botones.forEach(boton => {
     });
 });
 
-// Función para actualizar el carrito en el DOM
+// inicia el carrito y el total
+const carrito = {
+    productos: [],
+    total: 0
+};
+
+// función para actualizar el carrito en el DOM
 function actualizarCarritoEnDOM() {
     const carritoElement = document.getElementById("carrito");
-    carritoElement.innerHTML = ""; // Limpiar el contenido anterior
+    carritoElement.innerHTML = ""; // limpiar el contenido anterior
 
     carrito.productos.forEach(producto => {
         const item = document.createElement("div");
         item.classList.add("carrito-item");
-        item.innerHTML = `<span>${producto.nombre} - $${producto.precio.toFixed(2)}</span>`;
+        item.innerHTML = `<span>${producto.nombre} + $${producto.precio.toFixed(2)}</span>`;
         carritoElement.appendChild(item);
     });
 
@@ -87,32 +85,63 @@ function actualizarCarritoEnDOM() {
     carritoElement.appendChild(totalElement);
 }
 
-// Carrito HTML
+// carrito HTML
 const carritoHtml = document.getElementById("carrito");
 carritoHtml.innerHTML = `<h3>CARRITO</h3>`;
 
-// Agrega un evento de entrada de texto al elemento de búsqueda
+// filter
+const filtroInput = document.getElementById("filtro");
+
+// evento de entrada de texto al elemento de búsqueda
 filtroInput.addEventListener("input", filtrarProductos);
 
 function filtrarProductos() {
-    const filtroTexto = filtroInput.value.toLowerCase(); // Obtener el término de búsqueda en minúsculas
-
-    // Filtrar productos que coincidan con el término de búsqueda
+    const filtroTexto = filtroInput.value.toLowerCase();
     const productosFiltrados = productos.filter(producto => producto.nombre.toLowerCase().includes(filtroTexto));
-
-    // Obtén el elemento "filter" donde mostrarás los productos filtrados
     const imprimirFilter = document.getElementById("filter");
 
-    // Limpia la lista ordenada (ol) antes de agregar los elementos
     imprimirFilter.innerHTML = '';
 
-    // Itera a través de los productos filtrados y agrega sus nombres a la lista
     productosFiltrados.forEach(producto => {
         const li = document.createElement("li");
         li.textContent = producto.nombre;
         imprimirFilter.appendChild(li);
     });
 }
+
+// función para actualizar el carrito en el DOM
+function actualizarCarritoEnDOM() {
+    const carritoElement = document.getElementById("carrito");
+    carritoElement.innerHTML = ""; //limpia
+
+    carrito.productos.forEach(producto => {
+        const item = document.createElement("div");
+        item.classList.add("carrito-item");
+        item.innerHTML = `<span>${producto.nombre} + $${producto.precio.toFixed(2)}</span>`;
+        carritoElement.appendChild(item);
+    });
+
+    const totalElement = document.createElement("div");
+    totalElement.classList.add("carrito-total");
+    totalElement.innerHTML = `
+    Total: $${carrito.total.toFixed(2)}
+    `;
+    carritoElement.appendChild(totalElement);
+
+    // Guardar el total en el localStorage
+    localStorage.setItem('totalCompra', carrito.total.toFixed(2));
+}
+
+// localStorage al inicio de la página
+window.addEventListener('load', () => {
+    const totalGuardado = localStorage.getItem('totalCompra');
+    if (totalGuardado) {
+        carrito.total = parseFloat(totalGuardado);
+        actualizarCarritoEnDOM();
+    }
+});
+
+
 
 
 

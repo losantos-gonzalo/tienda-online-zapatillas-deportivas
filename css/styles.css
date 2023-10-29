@@ -46,4 +46,20 @@ body .mainContenedor .carrito {
   bottom: 11.4rem;
   background-color: rgba(0, 0, 0, 0.337254902);
   border-radius: 5px;
+}
+body input {
+  border: 2px solid #000000;
+  margin-left: 0.6rem;
+  margin-bottom: 4.5rem;
+  border-radius: 4px;
+  width: 15rem;
+}
+body li ol {
+  margin-left: 0.6rem;
+  width: 15rem;
+  position: fixed;
+  top: 4.5rem;
+  background-color: rgba(0, 0, 0, 0.337254902);
+  color: #ffffff;
+  border-radius: 5px;
 }/*# sourceMappingURL=styles.css.map */
