@@ -68,7 +68,7 @@ const carrito = {
 // función para actualizar el carrito en el DOM
 function actualizarCarritoEnDOM() {
     const carritoElement = document.getElementById("carrito");
-    carritoElement.innerHTML = ""; // limpiar el contenido anterior
+    carritoElement.innerHTML = "";
 
     carrito.productos.forEach(producto => {
         const item = document.createElement("div");
@@ -112,7 +112,7 @@ function filtrarProductos() {
 // función para actualizar el carrito en el DOM
 function actualizarCarritoEnDOM() {
     const carritoElement = document.getElementById("carrito");
-    carritoElement.innerHTML = ""; //limpia
+    carritoElement.innerHTML = "";
 
     carrito.productos.forEach(producto => {
         const item = document.createElement("div");
